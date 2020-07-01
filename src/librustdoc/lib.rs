@@ -136,9 +136,9 @@ where
 
 fn opts() -> Vec<RustcOptGroup> {
     vec![
-        stable("h", |o| o.optflag("h", "help", "show this help message")),
-        stable("V", |o| o.optflag("V", "version", "print rustdoc's version")),
-        stable("v", |o| o.optflag("v", "verbose", "use verbose output")),
+        stable("h", |o| o.optflagmulti("h", "help", "show this help message")),
+        stable("V", |o| o.optflagmulti("V", "version", "print rustdoc's version")),
+        stable("v", |o| o.optflagmulti("v", "verbose", "use verbose output")),
         stable("r", |o| {
             o.optopt("r", "input-format", "the input type of the specified file", "[rust]")
         }),
@@ -170,14 +170,14 @@ fn opts() -> Vec<RustcOptGroup> {
             )
         }),
         stable("plugins", |o| o.optmulti("", "plugins", "removed", "PLUGINS")),
-        stable("no-default", |o| o.optflag("", "no-defaults", "don't run the default passes")),
+        stable("no-default", |o| o.optflagmulti("", "no-defaults", "don't run the default passes")),
         stable("document-private-items", |o| {
-            o.optflag("", "document-private-items", "document private items")
+            o.optflagmulti("", "document-private-items", "document private items")
         }),
         unstable("document-hidden-items", |o| {
-            o.optflag("", "document-hidden-items", "document items that have doc(hidden)")
+            o.optflagmulti("", "document-hidden-items", "document items that have doc(hidden)")
         }),
-        stable("test", |o| o.optflag("", "test", "run code examples as tests")),
+        stable("test", |o| o.optflagmulti("", "test", "run code examples as tests")),
         stable("test-args", |o| {
             o.optmulti("", "test-args", "arguments to pass to the test runner", "ARGS")
         }),
@@ -239,7 +239,7 @@ fn opts() -> Vec<RustcOptGroup> {
             o.optopt("", "markdown-playground-url", "URL to send code snippets to", "URL")
         }),
         stable("markdown-no-toc", |o| {
-            o.optflag("", "markdown-no-toc", "don't include table of contents")
+            o.optflagmulti("", "markdown-no-toc", "don't include table of contents")
         }),
         stable("e", |o| {
             o.optopt(
@@ -265,13 +265,13 @@ fn opts() -> Vec<RustcOptGroup> {
             )
         }),
         unstable("display-warnings", |o| {
-            o.optflag("", "display-warnings", "to print code warnings when testing doc")
+            o.optflagmulti("", "display-warnings", "to print code warnings when testing doc")
         }),
         stable("crate-version", |o| {
             o.optopt("", "crate-version", "crate version to print into documentation", "VERSION")
         }),
         unstable("sort-modules-by-appearance", |o| {
-            o.optflag(
+            o.optflagmulti(
                 "",
                 "sort-modules-by-appearance",
                 "sort modules by where they appear in the program, rather than alphabetically",
@@ -328,7 +328,7 @@ fn opts() -> Vec<RustcOptGroup> {
             o.optopt("", "json", "Configure the structure of JSON diagnostics", "CONFIG")
         }),
         unstable("disable-minification", |o| {
-            o.optflag("", "disable-minification", "Disable minification applied on JS files")
+            o.optflagmulti("", "disable-minification", "Disable minification applied on JS files")
         }),
         stable("warn", |o| o.optmulti("W", "warn", "Set lint warnings", "OPT")),
         stable("allow", |o| o.optmulti("A", "allow", "Set lint allowed", "OPT")),
@@ -348,7 +348,7 @@ fn opts() -> Vec<RustcOptGroup> {
             o.optopt("", "index-page", "Markdown file to be used as index page", "PATH")
         }),
         unstable("enable-index-page", |o| {
-            o.optflag("", "enable-index-page", "To enable generation of the index page")
+            o.optflagmulti("", "enable-index-page", "To enable generation of the index page")
         }),
         unstable("static-root-path", |o| {
             o.optopt(
@@ -360,7 +360,7 @@ fn opts() -> Vec<RustcOptGroup> {
             )
         }),
         unstable("disable-per-crate-search", |o| {
-            o.optflag(
+            o.optflagmulti(
                 "",
                 "disable-per-crate-search",
                 "disables generating the crate selector on the search box",
@@ -375,21 +375,21 @@ fn opts() -> Vec<RustcOptGroup> {
             )
         }),
         unstable("generate-redirect-pages", |o| {
-            o.optflag(
+            o.optflagmulti(
                 "",
                 "generate-redirect-pages",
                 "Generate extra pages to support legacy URLs and tool links",
             )
         }),
         unstable("show-coverage", |o| {
-            o.optflag(
+            o.optflagmulti(
                 "",
                 "show-coverage",
                 "calculate percentage of public items with documentation",
             )
         }),
         unstable("enable-per-target-ignores", |o| {
-            o.optflag(
+            o.optflagmulti(
                 "",
                 "enable-per-target-ignores",
                 "parse ignore-foo for ignoring doctests on a per-target basis",
@@ -412,7 +412,7 @@ fn opts() -> Vec<RustcOptGroup> {
             )
         }),
         unstable("test-builder", |o| {
-            o.optflag(
+            o.optflagmulti(
                 "",
                 "test-builder",
                 "specified the rustc-like binary to use as the test builder",
